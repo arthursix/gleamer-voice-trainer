@@ -9,8 +9,44 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WorkflowRouteImport } from './routes/workflow'
+import { Route as SetupRouteImport } from './routes/setup'
+import { Route as RecapRouteImport } from './routes/recap'
+import { Route as ModelesRouteImport } from './routes/modeles'
+import { Route as DicteeRouteImport } from './routes/dictee'
+import { Route as AvanceRouteImport } from './routes/avance'
 import { Route as IndexRouteImport } from './routes/index'
 
+const WorkflowRoute = WorkflowRouteImport.update({
+  id: '/workflow',
+  path: '/workflow',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SetupRoute = SetupRouteImport.update({
+  id: '/setup',
+  path: '/setup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecapRoute = RecapRouteImport.update({
+  id: '/recap',
+  path: '/recap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ModelesRoute = ModelesRouteImport.update({
+  id: '/modeles',
+  path: '/modeles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DicteeRoute = DicteeRouteImport.update({
+  id: '/dictee',
+  path: '/dictee',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AvanceRoute = AvanceRouteImport.update({
+  id: '/avance',
+  path: '/avance',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +55,116 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/avance': typeof AvanceRoute
+  '/dictee': typeof DicteeRoute
+  '/modeles': typeof ModelesRoute
+  '/recap': typeof RecapRoute
+  '/setup': typeof SetupRoute
+  '/workflow': typeof WorkflowRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/avance': typeof AvanceRoute
+  '/dictee': typeof DicteeRoute
+  '/modeles': typeof ModelesRoute
+  '/recap': typeof RecapRoute
+  '/setup': typeof SetupRoute
+  '/workflow': typeof WorkflowRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/avance': typeof AvanceRoute
+  '/dictee': typeof DicteeRoute
+  '/modeles': typeof ModelesRoute
+  '/recap': typeof RecapRoute
+  '/setup': typeof SetupRoute
+  '/workflow': typeof WorkflowRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/avance'
+    | '/dictee'
+    | '/modeles'
+    | '/recap'
+    | '/setup'
+    | '/workflow'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/avance'
+    | '/dictee'
+    | '/modeles'
+    | '/recap'
+    | '/setup'
+    | '/workflow'
+  id:
+    | '__root__'
+    | '/'
+    | '/avance'
+    | '/dictee'
+    | '/modeles'
+    | '/recap'
+    | '/setup'
+    | '/workflow'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AvanceRoute: typeof AvanceRoute
+  DicteeRoute: typeof DicteeRoute
+  ModelesRoute: typeof ModelesRoute
+  RecapRoute: typeof RecapRoute
+  SetupRoute: typeof SetupRoute
+  WorkflowRoute: typeof WorkflowRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/workflow': {
+      id: '/workflow'
+      path: '/workflow'
+      fullPath: '/workflow'
+      preLoaderRoute: typeof WorkflowRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/setup': {
+      id: '/setup'
+      path: '/setup'
+      fullPath: '/setup'
+      preLoaderRoute: typeof SetupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recap': {
+      id: '/recap'
+      path: '/recap'
+      fullPath: '/recap'
+      preLoaderRoute: typeof RecapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/modeles': {
+      id: '/modeles'
+      path: '/modeles'
+      fullPath: '/modeles'
+      preLoaderRoute: typeof ModelesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dictee': {
+      id: '/dictee'
+      path: '/dictee'
+      fullPath: '/dictee'
+      preLoaderRoute: typeof DicteeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/avance': {
+      id: '/avance'
+      path: '/avance'
+      fullPath: '/avance'
+      preLoaderRoute: typeof AvanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,17 +177,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AvanceRoute: AvanceRoute,
+  DicteeRoute: DicteeRoute,
+  ModelesRoute: ModelesRoute,
+  RecapRoute: RecapRoute,
+  SetupRoute: SetupRoute,
+  WorkflowRoute: WorkflowRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

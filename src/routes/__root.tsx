@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { Header } from "../components/Header";
 
 function NotFoundComponent() {
   return (
@@ -72,11 +73,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Maîtriser Gleamer Voice — Formation interactive" },
+      { name: "description", content: "Formation interactive de 20 minutes pour les radiologues : maîtrisez la dictée naturelle avec Gleamer Voice." },
+      { name: "author", content: "Gleamer" },
+      { property: "og:title", content: "Maîtriser Gleamer Voice" },
+      { property: "og:description", content: "Formation interactive : la dictée naturelle pour radiologues." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
@@ -113,7 +114,15 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-1">
+          <Outlet />
+        </main>
+        <footer className="border-t border-border py-8 text-center text-xs text-muted-foreground">
+          Formation Gleamer Voice · Conçue pour radiologues · ~20 minutes
+        </footer>
+      </div>
     </QueryClientProvider>
   );
 }
