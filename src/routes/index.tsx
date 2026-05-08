@@ -273,7 +273,15 @@ function Home() {
           </>
         }
       >
-        <StepFlow />
+        <StepFlow
+          steps={[
+            { title: "Ouvrir Voice dans le navigateur", body: "Aucune installation. Connectez-vous depuis Chrome ou Edge." },
+            { title: "Sélectionner l'examen", body: "Voice détecte automatiquement le modèle de compte rendu adapté." },
+            { title: "Enregistrer", body: "Appuyez sur le bouton (ou la touche du SpeechMike). Parlez naturellement." },
+            { title: "Dicter votre raisonnement", body: "Comme à un confrère : indication, observations, conclusion." },
+            { title: "Relire et coller", body: "Vérifiez le compte rendu généré, copiez-le dans votre RIS / PACS.", tip: "Astuce : utilisez « remplace » ou « supprime » à la voix pour corriger sans clavier." },
+          ]}
+        />
       </Section>
 
       {/* CHAPITRE 6 — AVANCÉ */}
