@@ -1,51 +1,63 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { Mic } from "lucide-react";
-
-const NAV = [
-  { to: "/", label: "Accueil" },
-  { to: "/dictee", label: "1. Dictée naturelle" },
-  { to: "/modeles", label: "2. Modèles" },
-  { to: "/setup", label: "3. Setup" },
-  { to: "/workflow", label: "4. Workflow" },
-  { to: "/avance", label: "5. Aller plus loin" },
-  { to: "/recap", label: "Récap" },
-] as const;
+import { useEffect, useState } from "react";
+import { SECTIONS, useActiveSection } from "./SectionScroller";
 
 export function Header() {
-  const path = useRouterState({ select: (s) => s.location.pathname });
+  const active = useActiveSection();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 bg-glass border-b border-border">
-      <div className="mx-auto max-w-7xl px-6 h-16 flex items-center gap-6">
+    <header
+      className={`sticky top-0 z-50 transition-all ${
+        scrolled
+          ? "bg-background/70 backdrop-blur-xl border-b border-border"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="mx-auto max-w-7xl px-6 h-14 flex items-center gap-6">
         <Link to="/" className="flex items-center gap-2 shrink-0">
-          <span className="relative inline-flex h-8 w-8 items-center justify-center rounded-full bg-gradient-primary shadow-glow">
-            <Mic className="h-4 w-4 text-primary-foreground" />
+          <span className="relative inline-flex h-7 w-7 items-center justify-center rounded-full bg-gradient-primary shadow-glow">
+            <Mic className="h-3.5 w-3.5 text-primary-foreground" />
           </span>
-          <span className="font-semibold tracking-tight">
+          <span className="font-semibold tracking-tight text-[15px]">
             Gleamer <span className="text-muted-foreground font-normal">Voice</span>
           </span>
+          <span className="ml-2 hidden sm:inline text-[10px] uppercase tracking-[0.2em] text-primary/80 border border-primary/30 rounded-full px-2 py-0.5">
+            Formation
+          </span>
         </Link>
-        <nav className="hidden lg:flex items-center gap-1 ml-4 overflow-x-auto">
-          {NAV.map((item) => {
-            const active = path === item.to;
+        <nav className="hidden md:flex items-center gap-1 ml-auto">
+          {SECTIONS.filter((s) => s.id !== "intro").map((item) => {
+            const isActive = active === item.id;
             return (
-              <Link
-                key={item.to}
-                to={item.to}
-                className={`px-3 py-1.5 rounded-full text-sm transition-colors whitespace-nowrap ${
-                  active
-                    ? "bg-primary/20 text-foreground ring-1 ring-primary/40"
-                    : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                className={`px-3 py-1.5 rounded-full text-[13px] transition-colors whitespace-nowrap ${
+                  isActive
+                    ? "text-foreground bg-white/10"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {item.label}
-              </Link>
+              </a>
             );
           })}
         </nav>
-        <div className="ml-auto hidden md:block text-xs text-muted-foreground">
-          Formation · ~20 min
-        </div>
+        <a
+          href="#dictee"
+          className="ml-auto md:ml-0 inline-flex items-center gap-2 rounded-full bg-foreground text-background px-4 py-1.5 text-[13px] font-medium hover:opacity-90 transition"
+        >
+          Commencer
+        </a>
       </div>
     </header>
   );
