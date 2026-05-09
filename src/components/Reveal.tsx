@@ -32,8 +32,8 @@ export function Reveal({
     return () => obs.disconnect();
   }, []);
   return (
-    <Tag
-      ref={ref as never}
+    <div
+      ref={ref}
       className={className}
       style={{
         opacity: shown ? 1 : 0,
@@ -43,6 +43,6 @@ export function Reveal({
       }}
     >
       {children}
-    </Tag>
+    </div>
   );
 }
