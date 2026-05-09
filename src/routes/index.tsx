@@ -119,14 +119,16 @@ function Home() {
           </p>
 
           {/* Floating big mockup like the gleamer hero */}
-          <div className="relative max-w-3xl mx-auto">
-            <div className="absolute -inset-12 bg-gradient-primary opacity-30 blur-3xl rounded-full" />
-            <MacWindow title="Gleamer Voice" accent="Live" className="relative animate-float-up">
-              <ReportMockup highlight="findings" className="!shadow-none !rounded-none border-0" />
-            </MacWindow>
+          <div className="relative max-w-3xl mx-auto" data-tilt>
+            <div className="absolute -inset-12 bg-gradient-primary opacity-30 blur-3xl rounded-full animate-glow-pulse" />
+            <Tilt3D max={10} className="relative animate-float-soft">
+              <MacWindow title="Gleamer Voice" accent="Live" className="relative">
+                <ReportMockup highlight="findings" className="!shadow-none !rounded-none border-0" />
+              </MacWindow>
+            </Tilt3D>
           </div>
 
-          <h1 className="mt-20 text-5xl md:text-7xl lg:text-[88px] font-semibold tracking-[-0.045em] text-gradient leading-[0.95]">
+          <h1 className="mt-20 text-5xl md:text-7xl lg:text-[88px] font-semibold tracking-[-0.045em] text-aurora leading-[0.95]">
             Maîtriser Voice
             <br />
             en 20 minutes.
