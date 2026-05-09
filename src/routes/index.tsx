@@ -250,15 +250,17 @@ function Home() {
               ))}
             </ul>
           </div>
-          <div className="lg:col-span-3 relative">
+          <div className="lg:col-span-3 relative" data-tilt>
             <div className="absolute -inset-8 bg-gradient-primary opacity-25 blur-3xl rounded-full" />
-            <MacWindow title="Compte rendu — IRM Genou D" accent="Auto-rempli">
-              <img
-                src={reportImg}
-                alt="Compte rendu IRM genou auto-complété par Voice avec passages négatifs supprimés"
-                className="block w-full"
-              />
-            </MacWindow>
+            <Tilt3D max={9}>
+              <MacWindow title="Compte rendu — IRM Genou D" accent="Auto-rempli">
+                <img
+                  src={reportImg}
+                  alt="Compte rendu IRM genou auto-complété par Voice avec passages négatifs supprimés"
+                  className="block w-full"
+                />
+              </MacWindow>
+            </Tilt3D>
           </div>
         </div>
       </Section>
@@ -382,15 +384,17 @@ function Home() {
               ))}
             </ul>
           </div>
-          <div className="relative">
+          <div className="relative" data-tilt>
             <div className="absolute -inset-8 bg-gradient-primary opacity-20 blur-3xl rounded-full" />
-            <MacWindow title="SpeechMike Premium — raccourcis" className="relative">
-              <img
-                src={speechmikeImg}
-                alt="Schéma SpeechMike Philips Premium avec rôle de chaque bouton pour Voice"
-                className="block w-full"
-              />
-            </MacWindow>
+            <Tilt3D max={12}>
+              <MacWindow title="SpeechMike Premium — raccourcis" className="relative">
+                <img
+                  src={speechmikeImg}
+                  alt="Schéma SpeechMike Philips Premium avec rôle de chaque bouton pour Voice"
+                  className="block w-full"
+                />
+              </MacWindow>
+            </Tilt3D>
           </div>
         </div>
       </Section>
