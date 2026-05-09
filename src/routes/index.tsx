@@ -28,6 +28,9 @@ import { InteractiveBackground } from "@/components/InteractiveBackground";
 import { ScrollDots } from "@/components/SectionScroller";
 import { VoiceLogo } from "@/components/VoiceLogo";
 import { MacWindow } from "@/components/MacWindow";
+import { Tilt3D } from "@/components/Tilt3D";
+import { CursorGlow } from "@/components/CursorGlow";
+import { Reveal } from "@/components/Reveal";
 
 import reportImg from "@/assets/voice-report-genou.jpg";
 import speechmikeImg from "@/assets/voice-speechmike.jpg";
@@ -93,6 +96,7 @@ function Home() {
   return (
     <>
       <InteractiveBackground />
+      <CursorGlow />
       <ScrollDots />
 
       {/* HERO */}
@@ -115,14 +119,16 @@ function Home() {
           </p>
 
           {/* Floating big mockup like the gleamer hero */}
-          <div className="relative max-w-3xl mx-auto">
-            <div className="absolute -inset-12 bg-gradient-primary opacity-30 blur-3xl rounded-full" />
-            <MacWindow title="Gleamer Voice" accent="Live" className="relative animate-float-up">
-              <ReportMockup highlight="findings" className="!shadow-none !rounded-none border-0" />
-            </MacWindow>
+          <div className="relative max-w-3xl mx-auto" data-tilt>
+            <div className="absolute -inset-12 bg-gradient-primary opacity-30 blur-3xl rounded-full animate-glow-pulse" />
+            <Tilt3D max={10} className="relative animate-float-soft">
+              <MacWindow title="Gleamer Voice" accent="Live" className="relative">
+                <ReportMockup highlight="findings" className="!shadow-none !rounded-none border-0" />
+              </MacWindow>
+            </Tilt3D>
           </div>
 
-          <h1 className="mt-20 text-5xl md:text-7xl lg:text-[88px] font-semibold tracking-[-0.045em] text-gradient leading-[0.95]">
+          <h1 className="mt-20 text-5xl md:text-7xl lg:text-[88px] font-semibold tracking-[-0.045em] text-aurora leading-[0.95]">
             Maîtriser Voice
             <br />
             en 20 minutes.
@@ -153,17 +159,16 @@ function Home() {
               { v: "~20 min", l: "de formation", I: Clock },
               { v: "100%", l: "focus médical", I: Sparkles },
               { v: "0", l: "ponctuation à dicter", I: Mic },
-            ].map((s) => (
-              <div
-                key={s.l}
-                className="rounded-2xl border border-border bg-glass p-5 text-left"
-              >
-                <s.I className="h-4 w-4 text-primary mb-3" />
-                <div className="text-2xl md:text-3xl font-semibold text-gradient">
-                  {s.v}
+            ].map((s, i) => (
+              <Reveal key={s.l} delay={i * 90}>
+                <div className="rounded-2xl border border-border bg-glass p-5 text-left hover:border-primary/50 transition-colors hover:-translate-y-1 duration-500">
+                  <s.I className="h-4 w-4 text-primary mb-3" />
+                  <div className="text-2xl md:text-3xl font-semibold text-gradient">
+                    {s.v}
+                  </div>
+                  <div className="text-xs text-muted-foreground mt-1">{s.l}</div>
                 </div>
-                <div className="text-xs text-muted-foreground mt-1">{s.l}</div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -245,15 +250,17 @@ function Home() {
               ))}
             </ul>
           </div>
-          <div className="lg:col-span-3 relative">
+          <div className="lg:col-span-3 relative" data-tilt>
             <div className="absolute -inset-8 bg-gradient-primary opacity-25 blur-3xl rounded-full" />
-            <MacWindow title="Compte rendu — IRM Genou D" accent="Auto-rempli">
-              <img
-                src={reportImg}
-                alt="Compte rendu IRM genou auto-complété par Voice avec passages négatifs supprimés"
-                className="block w-full"
-              />
-            </MacWindow>
+            <Tilt3D max={9}>
+              <MacWindow title="Compte rendu — IRM Genou D" accent="Auto-rempli">
+                <img
+                  src={reportImg}
+                  alt="Compte rendu IRM genou auto-complété par Voice avec passages négatifs supprimés"
+                  className="block w-full"
+                />
+              </MacWindow>
+            </Tilt3D>
           </div>
         </div>
       </Section>
@@ -377,15 +384,17 @@ function Home() {
               ))}
             </ul>
           </div>
-          <div className="relative">
+          <div className="relative" data-tilt>
             <div className="absolute -inset-8 bg-gradient-primary opacity-20 blur-3xl rounded-full" />
-            <MacWindow title="SpeechMike Premium — raccourcis" className="relative">
-              <img
-                src={speechmikeImg}
-                alt="Schéma SpeechMike Philips Premium avec rôle de chaque bouton pour Voice"
-                className="block w-full"
-              />
-            </MacWindow>
+            <Tilt3D max={12}>
+              <MacWindow title="SpeechMike Premium — raccourcis" className="relative">
+                <img
+                  src={speechmikeImg}
+                  alt="Schéma SpeechMike Philips Premium avec rôle de chaque bouton pour Voice"
+                  className="block w-full"
+                />
+              </MacWindow>
+            </Tilt3D>
           </div>
         </div>
       </Section>

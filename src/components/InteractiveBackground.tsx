@@ -20,6 +20,8 @@ export function InteractiveBackground() {
 
   const orb1 = useRef<HTMLDivElement>(null);
   const orb2 = useRef<HTMLDivElement>(null);
+  const spot = useRef<HTMLDivElement>(null);
+  const grid = useRef<HTMLDivElement>(null);
   const target = useRef({ x: 0.5, y: 0.3 });
   const current = useRef({ x: 0.5, y: 0.3 });
 
@@ -28,7 +30,12 @@ export function InteractiveBackground() {
       target.current.x = e.clientX / window.innerWidth;
       target.current.y = e.clientY / window.innerHeight;
     };
+    const onScroll = () => {
+      if (grid.current)
+        grid.current.style.transform = `translate3d(0, ${window.scrollY * -0.05}px, 0)`;
+    };
     window.addEventListener("mousemove", onMove);
+    window.addEventListener("scroll", onScroll, { passive: true });
     let raf = 0;
     const loop = () => {
       current.current.x += (target.current.x - current.current.x) * 0.05;
@@ -37,11 +44,15 @@ export function InteractiveBackground() {
       const y = current.current.y * 100;
       if (orb1.current) orb1.current.style.transform = `translate3d(${x - 50}vw, ${y - 50}vh, 0)`;
       if (orb2.current) orb2.current.style.transform = `translate3d(${50 - x}vw, ${60 - y}vh, 0)`;
+      if (spot.current) {
+        spot.current.style.background = `radial-gradient(600px circle at ${target.current.x * 100}% ${target.current.y * 100}%, oklch(0.78 0.18 260 / 0.10), transparent 50%)`;
+      }
       raf = requestAnimationFrame(loop);
     };
     raf = requestAnimationFrame(loop);
     return () => {
       window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("scroll", onScroll);
       cancelAnimationFrame(raf);
     };
   }, []);
@@ -59,7 +70,23 @@ export function InteractiveBackground() {
         className="absolute top-1/2 left-1/2 h-[80vh] w-[80vh] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[140px] opacity-70 transition-[background] duration-[1500ms]"
         style={{ background: `radial-gradient(circle, ${palette.b}, transparent 70%)` }}
       />
-      {/* subtle moving spotlight */}
+      {/* parallax grid */}
+      <div
+        ref={grid}
+        className="absolute inset-0 opacity-[0.07]"
+        style={{
+          backgroundImage:
+            "linear-gradient(oklch(1 0 0 / 0.6) 1px, transparent 1px), linear-gradient(90deg, oklch(1 0 0 / 0.6) 1px, transparent 1px)",
+          backgroundSize: "64px 64px",
+          maskImage:
+            "radial-gradient(ellipse at center, black 20%, transparent 75%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse at center, black 20%, transparent 75%)",
+        }}
+      />
+      {/* cursor spotlight */}
+      <div ref={spot} className="absolute inset-0" />
+      {/* subtle noise */}
       <div
         className="absolute inset-0 opacity-[0.04] mix-blend-overlay"
         style={{

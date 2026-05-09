@@ -234,3 +234,44 @@
   background-size: 200% 100%;
   animation: shimmer 2.5s linear infinite;
 }
+
+/* Apple-style soft float */
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(0.4deg); }
+}
+.animate-float-soft { animation: float-soft 7s ease-in-out infinite; }
+
+/* Aurora gradient text */
+@keyframes aurora {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.text-aurora {
+  background: linear-gradient(
+    120deg,
+    oklch(0.95 0.02 260),
+    oklch(0.78 0.18 260),
+    oklch(0.78 0.16 200),
+    oklch(0.95 0.02 260)
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: aurora 10s ease-in-out infinite;
+}
+
+/* Gentle glow pulse */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.62 0.24 265 / 0); }
+  50% { box-shadow: 0 0 60px 10px oklch(0.62 0.24 265 / 0.25); }
+}
+.animate-glow-pulse { animation: glow-pulse 4s ease-in-out infinite; }
+
+/* Hide native cursor when custom cursor is on */
+@media (hover: hover) and (pointer: fine) {
+  html.cursor-on, html.cursor-on * { cursor: none !important; }
+  html.cursor-on a, html.cursor-on button { cursor: none !important; }
+}
