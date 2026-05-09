@@ -20,6 +20,8 @@ export function InteractiveBackground() {
 
   const orb1 = useRef<HTMLDivElement>(null);
   const orb2 = useRef<HTMLDivElement>(null);
+  const spot = useRef<HTMLDivElement>(null);
+  const grid = useRef<HTMLDivElement>(null);
   const target = useRef({ x: 0.5, y: 0.3 });
   const current = useRef({ x: 0.5, y: 0.3 });
 
@@ -28,7 +30,12 @@ export function InteractiveBackground() {
       target.current.x = e.clientX / window.innerWidth;
       target.current.y = e.clientY / window.innerHeight;
     };
+    const onScroll = () => {
+      if (grid.current)
+        grid.current.style.transform = `translate3d(0, ${window.scrollY * -0.05}px, 0)`;
+    };
     window.addEventListener("mousemove", onMove);
+    window.addEventListener("scroll", onScroll, { passive: true });
     let raf = 0;
     const loop = () => {
       current.current.x += (target.current.x - current.current.x) * 0.05;
@@ -37,11 +44,15 @@ export function InteractiveBackground() {
       const y = current.current.y * 100;
       if (orb1.current) orb1.current.style.transform = `translate3d(${x - 50}vw, ${y - 50}vh, 0)`;
       if (orb2.current) orb2.current.style.transform = `translate3d(${50 - x}vw, ${60 - y}vh, 0)`;
+      if (spot.current) {
+        spot.current.style.background = `radial-gradient(600px circle at ${target.current.x * 100}% ${target.current.y * 100}%, oklch(0.78 0.18 260 / 0.10), transparent 50%)`;
+      }
       raf = requestAnimationFrame(loop);
     };
     raf = requestAnimationFrame(loop);
     return () => {
       window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("scroll", onScroll);
       cancelAnimationFrame(raf);
     };
   }, []);
