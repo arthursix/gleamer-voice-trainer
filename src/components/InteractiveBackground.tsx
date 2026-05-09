@@ -70,7 +70,23 @@ export function InteractiveBackground() {
         className="absolute top-1/2 left-1/2 h-[80vh] w-[80vh] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[140px] opacity-70 transition-[background] duration-[1500ms]"
         style={{ background: `radial-gradient(circle, ${palette.b}, transparent 70%)` }}
       />
-      {/* subtle moving spotlight */}
+      {/* parallax grid */}
+      <div
+        ref={grid}
+        className="absolute inset-0 opacity-[0.07]"
+        style={{
+          backgroundImage:
+            "linear-gradient(oklch(1 0 0 / 0.6) 1px, transparent 1px), linear-gradient(90deg, oklch(1 0 0 / 0.6) 1px, transparent 1px)",
+          backgroundSize: "64px 64px",
+          maskImage:
+            "radial-gradient(ellipse at center, black 20%, transparent 75%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse at center, black 20%, transparent 75%)",
+        }}
+      />
+      {/* cursor spotlight */}
+      <div ref={spot} className="absolute inset-0" />
+      {/* subtle noise */}
       <div
         className="absolute inset-0 opacity-[0.04] mix-blend-overlay"
         style={{
