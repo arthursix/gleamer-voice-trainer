@@ -6,15 +6,13 @@ export function Reveal({
   delay = 0,
   y = 24,
   className = "",
-  as: Tag = "div",
 }: {
   children: ReactNode;
   delay?: number;
   y?: number;
   className?: string;
-  as?: keyof JSX.IntrinsicElements;
 }) {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const [shown, setShown] = useState(false);
   useEffect(() => {
     const el = ref.current;
