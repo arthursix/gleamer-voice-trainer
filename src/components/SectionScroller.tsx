@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 
 export const SECTIONS = [
-  { id: "intro", label: "Intro" },
-  { id: "dictee", label: "Dictée naturelle" },
-  { id: "modeles", label: "Modèles" },
-  { id: "live", label: "Démo en direct" },
-  { id: "setup", label: "Setup & matériel" },
-  { id: "workflow", label: "Workflow" },
-  { id: "avance", label: "Aller plus loin" },
-  { id: "recap", label: "Récap" },
+  { id: "intro", label: "Intro", tone: "intro" },
+  { id: "dictee", label: "Dictée naturelle", tone: "blue" },
+  { id: "modeles", label: "Modèles", tone: "violet" },
+  { id: "libre", label: "Dictée libre", tone: "teal" },
+  { id: "live", label: "Démo live", tone: "primary" },
+  { id: "setup", label: "Setup", tone: "amber" },
+  { id: "workflow", label: "Workflow", tone: "blue" },
+  { id: "import", label: "Vos modèles", tone: "violet" },
+  { id: "prompts", label: "Prompts", tone: "primary" },
+  { id: "feedback", label: "Feedback", tone: "teal" },
+  { id: "recap", label: "Récap", tone: "intro" },
 ] as const;
+
+export type Tone = (typeof SECTIONS)[number]["tone"];
 
 export function useActiveSection() {
   const [active, setActive] = useState<string>(SECTIONS[0].id);
@@ -30,6 +35,12 @@ export function useActiveSection() {
     return () => obs.disconnect();
   }, []);
   return active;
+}
+
+export function useActiveTone(): Tone {
+  const active = useActiveSection();
+  const found = SECTIONS.find((s) => s.id === active);
+  return (found?.tone ?? "intro") as Tone;
 }
 
 export function ScrollDots() {
