@@ -28,6 +28,9 @@ import { InteractiveBackground } from "@/components/InteractiveBackground";
 import { ScrollDots } from "@/components/SectionScroller";
 import { VoiceLogo } from "@/components/VoiceLogo";
 import { MacWindow } from "@/components/MacWindow";
+import { Tilt3D } from "@/components/Tilt3D";
+import { CursorGlow } from "@/components/CursorGlow";
+import { Reveal } from "@/components/Reveal";
 
 import reportImg from "@/assets/voice-report-genou.jpg";
 import speechmikeImg from "@/assets/voice-speechmike.jpg";
@@ -93,6 +96,7 @@ function Home() {
   return (
     <>
       <InteractiveBackground />
+      <CursorGlow />
       <ScrollDots />
 
       {/* HERO */}
