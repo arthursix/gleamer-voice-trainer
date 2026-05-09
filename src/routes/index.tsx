@@ -159,17 +159,16 @@ function Home() {
               { v: "~20 min", l: "de formation", I: Clock },
               { v: "100%", l: "focus médical", I: Sparkles },
               { v: "0", l: "ponctuation à dicter", I: Mic },
-            ].map((s) => (
-              <div
-                key={s.l}
-                className="rounded-2xl border border-border bg-glass p-5 text-left"
-              >
-                <s.I className="h-4 w-4 text-primary mb-3" />
-                <div className="text-2xl md:text-3xl font-semibold text-gradient">
-                  {s.v}
+            ].map((s, i) => (
+              <Reveal key={s.l} delay={i * 90}>
+                <div className="rounded-2xl border border-border bg-glass p-5 text-left hover:border-primary/50 transition-colors hover:-translate-y-1 duration-500">
+                  <s.I className="h-4 w-4 text-primary mb-3" />
+                  <div className="text-2xl md:text-3xl font-semibold text-gradient">
+                    {s.v}
+                  </div>
+                  <div className="text-xs text-muted-foreground mt-1">{s.l}</div>
                 </div>
-                <div className="text-xs text-muted-foreground mt-1">{s.l}</div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
