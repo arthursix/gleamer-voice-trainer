@@ -25,7 +25,6 @@ import { TemplateMagic } from "@/components/TemplateMagic";
 import { StepFlow } from "@/components/StepFlow";
 import { ReportMockup } from "@/components/ReportMockup";
 import { InteractiveBackground } from "@/components/InteractiveBackground";
-import { Scene3DBackground } from "@/components/Scene3DBackground";
 import { ScrollDots } from "@/components/SectionScroller";
 import { VoiceLogo } from "@/components/VoiceLogo";
 import { MacWindow } from "@/components/MacWindow";
@@ -103,7 +102,6 @@ function Home() {
   return (
     <>
       <InteractiveBackground />
-      <Scene3DBackground />
       <CursorGlow />
       <ScrollDots />
 
