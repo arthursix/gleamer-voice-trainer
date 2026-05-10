@@ -25,6 +25,7 @@ import { TemplateMagic } from "@/components/TemplateMagic";
 import { StepFlow } from "@/components/StepFlow";
 import { ReportMockup } from "@/components/ReportMockup";
 import { InteractiveBackground } from "@/components/InteractiveBackground";
+import { Scene3DBackground } from "@/components/Scene3DBackground";
 import { ScrollDots } from "@/components/SectionScroller";
 import { VoiceLogo } from "@/components/VoiceLogo";
 import { MacWindow } from "@/components/MacWindow";
@@ -72,22 +73,28 @@ function Section({
       id={id}
       className="relative mx-auto max-w-7xl px-6 py-24 md:py-32 scroll-mt-20"
     >
-      <div className={`max-w-3xl ${align === "center" ? "mx-auto text-center" : ""}`}>
-        {eyebrow && (
-          <div className="text-[11px] uppercase tracking-[0.25em] text-primary/80 mb-4">
-            {eyebrow}
-          </div>
-        )}
-        <h2 className="text-4xl md:text-6xl font-semibold tracking-tight text-gradient leading-[1.05]">
-          {title}
-        </h2>
-        {lead && (
-          <p className="mt-6 text-lg md:text-xl text-muted-foreground leading-relaxed">
-            {lead}
-          </p>
-        )}
-      </div>
-      {children && <div className="mt-12">{children}</div>}
+      <Reveal>
+        <div className={`max-w-3xl ${align === "center" ? "mx-auto text-center" : ""}`}>
+          {eyebrow && (
+            <div className="text-[11px] uppercase tracking-[0.25em] text-primary/80 mb-4">
+              {eyebrow}
+            </div>
+          )}
+          <h2 className="text-4xl md:text-6xl font-semibold tracking-tight text-gradient leading-[1.05]">
+            {title}
+          </h2>
+          {lead && (
+            <p className="mt-6 text-lg md:text-xl text-muted-foreground leading-relaxed">
+              {lead}
+            </p>
+          )}
+        </div>
+      </Reveal>
+      {children && (
+        <Reveal delay={120}>
+          <div className="mt-12">{children}</div>
+        </Reveal>
+      )}
     </section>
   );
 }
@@ -96,6 +103,7 @@ function Home() {
   return (
     <>
       <InteractiveBackground />
+      <Scene3DBackground />
       <CursorGlow />
       <ScrollDots />
 
