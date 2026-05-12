@@ -31,6 +31,7 @@ import { MacWindow } from "@/components/MacWindow";
 import { Tilt3D } from "@/components/Tilt3D";
 import { CursorGlow } from "@/components/CursorGlow";
 import { Reveal } from "@/components/Reveal";
+import { SectionTransition } from "@/components/SectionTransition";
 
 import reportImg from "@/assets/voice-report-genou.jpg";
 import speechmikeImg from "@/assets/voice-speechmike.jpg";
@@ -217,6 +218,7 @@ function Home() {
         </div>
       </Section>
 
+      <SectionTransition variant="violet" />
       {/* CHAPITRE 2 — MODÈLES INTELLIGENTS */}
       <Section
         id="modeles"
@@ -274,6 +276,7 @@ function Home() {
         </div>
       </Section>
 
+      <SectionTransition variant="teal" />
       {/* CHAPITRE 3 — DICTÉE LIBRE */}
       <Section
         id="libre"
@@ -324,6 +327,7 @@ function Home() {
         </p>
       </Section>
 
+      <SectionTransition variant="blue" />
       {/* CHAPITRE 4 — DÉMO LIVE */}
       <Section
         id="live"
@@ -339,6 +343,7 @@ function Home() {
         <MicSimulator />
       </Section>
 
+      <SectionTransition variant="amber" />
       {/* CHAPITRE 5 — SETUP */}
       <Section
         id="setup"
@@ -408,6 +413,7 @@ function Home() {
         </div>
       </Section>
 
+      <SectionTransition variant="blue" />
       {/* CHAPITRE 6 — WORKFLOW */}
       <Section
         id="workflow"
@@ -447,6 +453,7 @@ function Home() {
         />
       </Section>
 
+      <SectionTransition variant="violet" />
       {/* CHAPITRE 7 — IMPORTER VOS MODÈLES */}
       <Section
         id="import"
@@ -501,6 +508,7 @@ function Home() {
         </div>
       </Section>
 
+      <SectionTransition variant="blue" />
       {/* CHAPITRE 8 — PROMPTS */}
       <Section
         id="prompts"
@@ -602,6 +610,7 @@ function Home() {
         </div>
       </Section>
 
+      <SectionTransition variant="teal" />
       {/* CHAPITRE 9 — FEEDBACK */}
       <Section
         id="feedback"
@@ -639,6 +648,7 @@ function Home() {
         </div>
       </Section>
 
+      <SectionTransition variant="violet" />
       {/* RÉCAP */}
       <Section
         id="recap"
