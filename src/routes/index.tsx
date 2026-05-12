@@ -75,8 +75,11 @@ function Section({
       <Reveal>
         <div className={`max-w-3xl ${align === "center" ? "mx-auto text-center" : ""}`}>
           {eyebrow && (
-            <div className="text-[11px] uppercase tracking-[0.25em] text-primary/80 mb-4">
-              {eyebrow}
+            <div className="inline-flex items-center gap-2 mb-4">
+              <span className="h-px w-8 bg-gradient-to-r from-transparent to-primary/60" />
+              <span className="text-[11px] uppercase tracking-[0.28em] eyebrow-shine font-semibold">
+                {eyebrow}
+              </span>
             </div>
           )}
           <h2 className="text-4xl md:text-6xl font-semibold tracking-tight text-gradient leading-[1.05]">
