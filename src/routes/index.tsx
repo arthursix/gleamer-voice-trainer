@@ -31,6 +31,7 @@ import { MacWindow } from "@/components/MacWindow";
 import { Tilt3D } from "@/components/Tilt3D";
 import { CursorGlow } from "@/components/CursorGlow";
 import { Reveal } from "@/components/Reveal";
+import { SectionTransition } from "@/components/SectionTransition";
 
 import reportImg from "@/assets/voice-report-genou.jpg";
 import speechmikeImg from "@/assets/voice-speechmike.jpg";
