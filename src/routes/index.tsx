@@ -232,7 +232,7 @@ function Home() {
               </Reveal>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[10px] uppercase tracking-[0.3em] text-muted-foreground animate-pulse">
           Faites défiler ↓
