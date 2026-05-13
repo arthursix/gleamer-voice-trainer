@@ -73,14 +73,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Maîtriser Gleamer Voice — Formation interactive" },
-      { name: "description", content: "Formation interactive de 20 minutes pour les radiologues : maîtrisez la dictée naturelle avec Gleamer Voice." },
+      { title: "Lovable App" },
+      { name: "description", content: "Gleamer Voice Training is an interactive web application for presenting and training users on Gleamer's Voice product." },
       { name: "author", content: "Gleamer" },
-      { property: "og:title", content: "Maîtriser Gleamer Voice" },
-      { property: "og:description", content: "Formation interactive : la dictée naturelle pour radiologues." },
+      { property: "og:title", content: "Lovable App" },
+      { property: "og:description", content: "Gleamer Voice Training is an interactive web application for presenting and training users on Gleamer's Voice product." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Lovable App" },
+      { name: "twitter:description", content: "Gleamer Voice Training is an interactive web application for presenting and training users on Gleamer's Voice product." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/29130274-62d4-461d-b206-aac1a50fa237/id-preview-10ce370a--5d883861-847b-4336-a4d8-25efdb6d5008.lovable.app-1778615574591.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/29130274-62d4-461d-b206-aac1a50fa237/id-preview-10ce370a--5d883861-847b-4336-a4d8-25efdb6d5008.lovable.app-1778615574591.png" },
     ],
     links: [
       {
