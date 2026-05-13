@@ -33,6 +33,8 @@ import { CursorGlow } from "@/components/CursorGlow";
 import { Reveal } from "@/components/Reveal";
 import { SectionTransition } from "@/components/SectionTransition";
 import { motion } from "framer-motion";
+import { CountUp } from "@/components/CountUp";
+import { TrustBar } from "@/components/TrustBar";
 
 import reportImg from "@/assets/voice-report-genou.jpg";
 import speechmikeImg from "@/assets/voice-speechmike.jpg";
@@ -214,21 +216,27 @@ function Home() {
             </motion.a>
           </motion.div>
 
+          <TrustBar className="mt-10" />
+
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto">
             {[
-              { v: "×3", l: "plus rapide", I: Zap },
-              { v: "~20 min", l: "de formation", I: Clock },
-              { v: "100%", l: "focus médical", I: Sparkles },
-              { v: "0", l: "ponctuation à dicter", I: Mic },
+              { node: <CountUp to={3} prefix="×" />, l: "plus rapide", I: Zap },
+              { node: <CountUp to={20} suffix=" min" />, l: "de formation", I: Clock },
+              { node: <CountUp to={100} suffix="%" />, l: "focus médical", I: Sparkles },
+              { node: <CountUp to={0} />, l: "ponctuation à dicter", I: Mic },
             ].map((s, i) => (
               <Reveal key={s.l} delay={i * 90}>
-                <div className="rounded-2xl border border-border bg-glass p-5 text-left hover:border-primary/50 transition-colors hover:-translate-y-1 duration-500">
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  transition={{ type: "spring", stiffness: 320, damping: 20 }}
+                  className="rounded-2xl border border-border bg-glass p-5 text-left hover:border-primary/50"
+                >
                   <s.I className="h-4 w-4 text-primary mb-3" />
                   <div className="text-2xl md:text-3xl font-semibold text-gradient">
-                    {s.v}
+                    {s.node}
                   </div>
                   <div className="text-xs text-muted-foreground mt-1">{s.l}</div>
-                </div>
+                </motion.div>
               </Reveal>
             ))}
           </div>
