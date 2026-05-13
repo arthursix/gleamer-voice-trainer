@@ -32,6 +32,7 @@ import { Tilt3D } from "@/components/Tilt3D";
 import { CursorGlow } from "@/components/CursorGlow";
 import { Reveal } from "@/components/Reveal";
 import { SectionTransition } from "@/components/SectionTransition";
+import { motion } from "framer-motion";
 
 import reportImg from "@/assets/voice-report-genou.jpg";
 import speechmikeImg from "@/assets/voice-speechmike.jpg";
@@ -114,19 +115,45 @@ function Home() {
         id="intro"
         className="relative min-h-[92vh] flex items-center justify-center px-6 pt-16 pb-20 text-center"
       >
-        <div className="max-w-5xl mx-auto">
-          <div className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground mb-6">
+        <motion.div
+          className="max-w-5xl mx-auto"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+          }}
+        >
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
+            }}
+            className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground mb-6"
+          >
             Nouveau
-          </div>
-          <div className="flex items-center justify-center gap-4 mb-6">
+          </motion.div>
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, scale: 0.9, y: 20 },
+              visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 1, ease: [0.22, 1, 0.36, 1] } },
+            }}
+            className="flex items-center justify-center gap-4 mb-6"
+          >
             <VoiceLogo size={64} />
             <span className="text-6xl md:text-7xl font-semibold tracking-[-0.04em]">
               Voice
             </span>
-          </div>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 tracking-tight">
+          </motion.div>
+          <motion.p
+            variants={{
+              hidden: { opacity: 0, y: 16 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] } },
+            }}
+            className="text-xl md:text-2xl text-muted-foreground mb-12 tracking-tight"
+          >
             Transformez votre voix en compte rendu.
-          </p>
+          </motion.p>
 
           {/* Floating big mockup like the gleamer hero */}
           <div className="relative max-w-3xl mx-auto" data-tilt>
@@ -138,30 +165,54 @@ function Home() {
             </Tilt3D>
           </div>
 
-          <h1 className="mt-20 text-5xl md:text-7xl lg:text-[88px] font-semibold tracking-[-0.045em] text-aurora leading-[0.95]">
+          <motion.h1
+            initial={{ opacity: 0, y: 40, filter: "blur(12px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-20 text-5xl md:text-7xl lg:text-[88px] font-semibold tracking-[-0.045em] text-aurora leading-[0.95]"
+          >
             Maîtriser Voice
             <br />
             en 20 minutes.
-          </h1>
-          <p className="mt-8 max-w-2xl mx-auto text-lg md:text-xl text-muted-foreground leading-relaxed">
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-8 max-w-2xl mx-auto text-lg md:text-xl text-muted-foreground leading-relaxed"
+          >
             Une formation interactive pour radiologues. Parlez naturellement,
             comme à un confrère — l'IA structure le compte rendu pour vous.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <a
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-10 flex flex-wrap justify-center gap-3"
+          >
+            <motion.a
+              whileHover={{ scale: 1.04, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 400, damping: 18 }}
               href="#dictee"
-              className="group inline-flex items-center gap-2 rounded-full bg-foreground text-background px-7 py-3.5 text-[15px] font-medium hover:opacity-90 transition"
+              className="group inline-flex items-center gap-2 rounded-full bg-foreground text-background px-7 py-3.5 text-[15px] font-medium hover:opacity-90"
             >
               Commencer la formation
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </a>
-            <a
+            </motion.a>
+            <motion.a
+              whileHover={{ scale: 1.04, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 400, damping: 18 }}
               href="#recap"
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-glass px-7 py-3.5 text-[15px] font-medium hover:border-primary/50 transition"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-glass px-7 py-3.5 text-[15px] font-medium hover:border-primary/50"
             >
               Voir les 8 réflexes
-            </a>
-          </div>
+            </motion.a>
+          </motion.div>
 
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto">
             {[
