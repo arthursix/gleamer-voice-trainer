@@ -10,6 +10,7 @@ import {
 
 import appCss from "../styles.css?url";
 import { Header } from "../components/Header";
+import { BackgroundGradientAnimation } from "../components/ui/background-gradient-animation";
 
 function NotFoundComponent() {
   return (
@@ -118,7 +119,27 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen flex flex-col">
+      {/* Global animated gradient backdrop — Gleamer tones, behind everything */}
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 -z-20 opacity-60 mix-blend-screen"
+      >
+        <BackgroundGradientAnimation
+          gradientBackgroundStart="rgb(10, 12, 28)"
+          gradientBackgroundEnd="rgb(6, 10, 36)"
+          firstColor="56, 110, 255"
+          secondColor="120, 90, 255"
+          thirdColor="40, 200, 230"
+          fourthColor="80, 60, 200"
+          fifthColor="200, 160, 80"
+          pointerColor="120, 140, 255"
+          size="80%"
+          blendingValue="hard-light"
+          interactive={false}
+          containerClassName="!fixed !inset-0 !h-full !w-full"
+        />
+      </div>
+      <div className="relative min-h-screen flex flex-col">
         <Header />
         <main className="flex-1">
           <Outlet />
