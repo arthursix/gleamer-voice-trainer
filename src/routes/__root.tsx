@@ -119,20 +119,20 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Global animated gradient backdrop — Gleamer tones, behind everything */}
+      {/* Global animated gradient backdrop — Gleamer tones, very subtle */}
       <div
         aria-hidden
-        className="pointer-events-none fixed inset-0 -z-20 opacity-45 mix-blend-screen"
+        className="pointer-events-none fixed inset-0 -z-20 opacity-25 mix-blend-screen"
       >
         <BackgroundGradientAnimation
-          gradientBackgroundStart="rgb(13, 16, 38)"
-          gradientBackgroundEnd="rgb(9, 12, 30)"
-          firstColor="78, 99, 246"
-          secondColor="120, 86, 230"
-          thirdColor="64, 178, 214"
+          gradientBackgroundStart="rgb(10, 10, 15)"
+          gradientBackgroundEnd="rgb(10, 10, 15)"
+          firstColor="79, 110, 247"
+          secondColor="0, 212, 255"
+          thirdColor="120, 86, 230"
           fourthColor="46, 64, 180"
-          fifthColor="158, 168, 96"
-          pointerColor="120, 150, 255"
+          fifthColor="79, 110, 247"
+          pointerColor="79, 110, 247"
           size="80%"
           blendingValue="soft-light"
           interactive={false}
