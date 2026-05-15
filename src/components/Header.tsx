@@ -1,63 +1,87 @@
 import { Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { SECTIONS, useActiveSection } from "./SectionScroller";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+
+const NAV = [
+  { id: "features", label: "Fonctionnalités" },
+  { id: "comparison", label: "Avant / Après" },
+  { id: "how", label: "Comment ça marche" },
+  { id: "setup", label: "Setup" },
+];
 
 export function Header() {
-  const active = useActiveSection();
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Show only main chapters in nav for clarity
-  const navItems = SECTIONS.filter((s) =>
-    ["dictee", "modeles", "live", "workflow", "prompts"].includes(s.id)
+  const { scrollY } = useScroll();
+  const bg = useTransform(
+    scrollY,
+    [0, 100],
+    ["rgba(10,10,15,0)", "rgba(10,10,15,0.9)"],
+  );
+  const border = useTransform(
+    scrollY,
+    [0, 100],
+    ["rgba(255,255,255,0)", "rgba(255,255,255,0.06)"],
   );
 
   return (
-    <header
-      className={`sticky top-0 z-50 transition-all ${
-        scrolled
-          ? "bg-background/60 backdrop-blur-2xl border-b border-white/5"
-          : "bg-transparent"
-      }`}
+    <motion.header
+      style={{
+        background: bg,
+        borderBottom: "1px solid",
+        borderBottomColor: border,
+        backdropFilter: "blur(20px)",
+        WebkitBackdropFilter: "blur(20px)",
+      }}
+      className="sticky top-0 z-50"
     >
-      <div className="mx-auto max-w-7xl px-6 h-16 flex items-center gap-6">
-        <Link to="/" className="flex items-center gap-2.5 shrink-0">
-          <span className="relative inline-flex h-6 w-6 rounded-full bg-gradient-to-br from-white via-white/60 to-white/20 shadow-[inset_0_-4px_8px_rgba(0,0,0,0.3)]" />
-          <span className="font-semibold tracking-tight text-[16px]">Gleamer</span>
+      <div className="mx-auto max-w-[1200px] px-6 h-16 flex items-center gap-8">
+        <Link to="/" className="flex items-center gap-2.5 shrink-0 group">
+          <span
+            className="h-7 w-7 rounded-lg"
+            style={{
+              background: "linear-gradient(135deg, #4F6EF7, #00D4FF)",
+              boxShadow: "0 4px 16px rgba(79,110,247,0.5)",
+            }}
+          />
+          <span className="font-bold text-[16px] tracking-tight text-gradient-hero">
+            Gleamer Voice
+          </span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-1 mx-auto">
-          {navItems.map((item) => {
-            const isActive = active === item.id;
-            return (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                className={`px-3.5 py-1.5 rounded-full text-[13px] transition-colors whitespace-nowrap ${
-                  isActive
-                    ? "text-foreground bg-white/10"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {item.label}
-              </a>
-            );
-          })}
+        <nav className="hidden md:flex items-center gap-7 mx-auto">
+          {NAV.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className="relative text-[14px] text-[#8B92A5] hover:text-white transition-colors group"
+            >
+              {item.label}
+              <motion.span
+                className="absolute left-0 -bottom-1 h-[2px] w-full origin-left"
+                style={{
+                  background: "linear-gradient(90deg, #4F6EF7, #00D4FF)",
+                }}
+                initial={{ scaleX: 0 }}
+                whileHover={{ scaleX: 1 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              />
+            </a>
+          ))}
         </nav>
 
-        <a
-          href="#dictee"
-          className="ml-auto md:ml-0 inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-4 py-1.5 text-[13px] font-medium hover:opacity-90 transition shadow-[0_8px_30px_-10px_oklch(0.62_0.24_265_/_0.8)]"
+        <motion.a
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.97 }}
+          href="#hero"
+          className="ml-auto md:ml-0 inline-flex items-center gap-1.5 rounded-xl px-4 py-2 text-[13px] font-semibold text-white"
+          style={{
+            background: "#4F6EF7",
+            boxShadow: "0 4px 16px rgba(79,110,247,0.4)",
+          }}
         >
-          Démarrer la formation
-        </a>
+          Commencer
+          <ArrowRight className="h-3.5 w-3.5" />
+        </motion.a>
       </div>
-    </header>
+    </motion.header>
   );
 }
