@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
@@ -33,14 +34,14 @@
   --color-glow: var(--glow);
   --color-success: var(--success);
 
-  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "Inter", system-ui, sans-serif;
+  --font-display: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
 }
 
 :root {
-  --radius: 0.875rem;
+  --radius: 1rem;
 
-  /* Gleamer dark theme */
-  --background: oklch(0.16 0.02 260);
+  /* Gleamer premium dark theme — #0A0A0F */
+  --background: oklch(0.10 0.015 265);
   --foreground: oklch(0.98 0.005 250);
   --card: oklch(0.21 0.025 260);
   --card-foreground: oklch(0.98 0.005 250);
